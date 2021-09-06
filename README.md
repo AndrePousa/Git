@@ -105,7 +105,7 @@ Os nomes de arquivos/diretórios ou extensões de arquivos listados no arquivo *
 
 ### Visualizar histórico
 
-##### Exibir histórico
+##### Exibir histórico de commits
 	
 	git log
 	
@@ -214,6 +214,10 @@ Os demais **pushes** não precisam dessa informação
 
 ##### Atualizar os arquivos no branch atual
 
+	git pull origin (Branch) => Faz o pull do conteudo da branch de origem para Branch local.
+	
+	git pull origin (Branch) --rebase  => faz o pull após ter feito o commit, confirmando o conteudo base da branch remota para a branch local. 
+	
 	git pull
 	
 ##### Buscar as alterações, mas não aplica-las no branch atual
@@ -253,31 +257,33 @@ Para criar uma tag assinada é necessário uma chave privada (GNU Privacy Guard 
 	
 ### Branches
 
-O **master** é o branch principal do GIT.
+O **main** é o branch principal do GIT.
 
 O **HEAD** é um ponteiro *especial* que indica qual é o branch atual. Por padrão, o **HEAD** aponta para o branch principal, o **master**.
 
 ##### Criando um novo branch
 
-	git branch bug-123
+	git branch (nome da branch)
 	
 ##### Trocando para um branch existente
 
-	git checkout bug-123
+	git checkout (nome da branch)
 	
 Neste caso, o ponteiro principal **HEAD** esta apontando para o branch chamado bug-123.
 
 ##### Criar um novo branch e trocar 
 
-	git checkout -b bug-456
+	git checkout -b (nome da branch)
 	
-##### Voltar para o branch principal (master)
+##### Voltar para o branch principal (main)
 
-	git checkout master
+	git checkout main
 	
 ##### Resolver merge entre os branches
-
-	git merge bug-123
+	
+	git reset --merge (hash commit) => sai do estado de merge e volta para o commit indicado. 
+	
+	git merge (nome da branch)
 	
 Para realizar o *merge*, é necessário estar no branch que deverá receber as alterações. O *merge* pode automático ou manual. O merge automático será feito em arquivos textos que não sofreram alterações nas mesmas linhas, já o merge manual será feito em arquivos textos que sofreram alterações nas mesmas linhas.
 
@@ -290,9 +296,7 @@ A mensagem indicando um *merge* manual será:
 
 ##### Apagando um branch
 
-	git branch -d bug-123
-
-##### Listar branches 
+	git branch -d (nome da branch) 
 
 ###### Listar branches
 
@@ -302,11 +306,11 @@ A mensagem indicando um *merge* manual será:
 
 	git branch -v
 
-###### Listar branches que já foram fundidos (merged) com o **master**
+###### Listar branches que já foram fundidos (merged) com o **main**
 
 	git branch --merged
 
-###### Listar branches que não foram fundidos (merged) com o **master**
+###### Listar branches que não foram fundidos (merged) com o **main**
 
 	git branch --no-merged
 
@@ -314,28 +318,28 @@ A mensagem indicando um *merge* manual será:
 
 ###### Criando um branch remoto com o mesmo nome
 
-	git push origin bug-123
+	git push origin (nome da branch)
 
 ###### Criando um branch remoto com nome diferente
 
-	git push origin bug-123:new-branch
+	git push origin (nome da branch):new-branch
 
 ##### Baixar um branch remoto para edição
 
-	git checkout -b bug-123 origin/bug-123
+	git checkout -b (nome da branch) origin/(nome da branch)
 
 
 ##### Apagar branch remoto
 
-	git push origin:bug-123
+	git push origin:(nome da branch)
 
 ### Rebasing
 
-Fazendo o **rebase** entre um o branch bug-123 e o master.
+Fazendo o **rebase** entre um o branch (nome da branch) e o main.
 
 	git checkout experiment
 	
-	git rebase master
+	git rebase main
 	
 
 Mais informações e explicações sobre o [Rebasing](http://git-scm.com/book/en/Git-Branching-Rebasing)
